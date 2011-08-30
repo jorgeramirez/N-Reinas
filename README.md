@@ -17,9 +17,10 @@ Carrera: Ingeniería Informática.
     Facultad Politécnica - Universidad Nacional de Asunción.
 
 Integrantes:
-    * Alejandro Arce
-    * Gabriel Caroni
-    * Rodrigo Parra
-    * Jorge Ramírez
+
+* Alejandro Arce
+* Gabriel Caroni
+* Rodrigo Parra
+* Jorge Ramírez
 
 
