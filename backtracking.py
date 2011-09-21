@@ -32,7 +32,6 @@ solutions."""
         while len(estado) != num:
             estado = estado+(-1,)
         nodos_visitados = nodos_visitados + 1
-        #print estado
         solucion = {"solution": False, "board" : estado}
         sol.put(solucion)
         if not conflict(state,pos):
@@ -45,11 +44,9 @@ solutions."""
 def backtracking(queen_number, uno):
     global nodos_visitados
     board = [-1 for i in range(queen_number)]
-    print board
     q = Queue()
     aux = {"board": board, "solution":False}
     q.put(aux)
-    #print q.qsize()
     p2 = Process(target=draw_board, args=(q, queen_number))
     p2.start()
     t1 = time.time()
@@ -62,5 +59,3 @@ def backtracking(queen_number, uno):
     t2 = time.time()
     tiempo = t2-t1
     draw_stats(nodos_visitados, round(tiempo, 8))
-    #print tiempo
-    #print nodos_visitados
