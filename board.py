@@ -8,7 +8,7 @@ def draw_board(q, n):
     pygame.init()
     colors = [(255,250,250), (0,0,0), (255,255,0)]    # set up colors [white, black,yellow]
 
-    surfaceSz = 480           # Proposed physical surface size.
+    surfaceSz = 640          # Proposed physical surface size.
     sq_sz = surfaceSz // n    # sq_sz is length of a square.
     surfaceSz = n * sq_sz     # Adjust to exact multiple of sq_sz
 
@@ -57,8 +57,10 @@ def draw_board(q, n):
                     (col*sq_sz+ball_offset,row*sq_sz+ball_offset))
 
         pygame.display.flip()
-        
-        pygame.time.delay(50)
+        if solution:
+            pygame.time.delay(300)
+        else:
+            pygame.time.delay(50)
 
 
     pygame.quit()
@@ -85,9 +87,6 @@ def draw_stats(nodos, tiempo):
 
 		
 	
-	
-	
-
 
 if __name__ == '__main__':
     q = Queue()

@@ -76,7 +76,7 @@ Todas las soluciones</property>
             <property name="can_focus">True</property>
             <property name="invisible_char">&#x25CF;</property>
             <property name="width_chars">1</property>
-            <property name="adjustment">1 1 12 1 10 10</property>
+            <property name="adjustment">1 1 100 1 10 10</property>
             <property name="numeric">True</property>
           </widget>
           <packing>
