@@ -1,0 +1,74 @@
+#!/usr/bin/python
+import random
+
+MAX_ITER = 100000000
+BIG_INT = 100000000
+
+def generate_random_assignment(n):
+    r = range(0, n)
+    random.shuffle(r)
+    return r
+
+def count_conflicts(pos, val, assignment):
+    c = 0
+    for p, v in enumerate(assignment):
+        if p == pos: 
+            continue
+        if v == assignment[pos]:
+            c += 1
+        if abs(p - pos) == abs(v - val):
+            c += 1
+    return c
+    
+
+def is_solution(assignment):
+    c = 0
+    for pos, val in enumerate(assignment):
+        c += count_conflicts(pos, val, assignment)
+    return c == 0
+
+
+def get_conflicted_variables(assignment):
+    result = []
+    for pos, val in enumerate(assignment):
+        if count_conflicts(pos, val, assignment):
+            result.append(pos)
+    return result
+
+
+def get_min_conflict_value_for(var, assignment):
+    min = BIG_INT
+    result_candidates = []
+    for val in xrange(0, len(assignment)):
+        c = count_conflicts(var, val, assignment)
+        if c <= min:
+            if c < min:
+                result_candidates = []
+                min = c
+            result_candidates.append(val)
+    if result_candidates:
+        return result_candidates[random.randrange(0, len(result_candidates))]
+    else:
+        return None
+
+def send(q, a, s):
+    q.put(dict(board=a, solution=s))
+
+def solve(n, quee=None):
+    assignment = generate_random_assignment(n)
+    print assignment
+    for i in xrange(0, MAX_ITER):
+        #print i
+        if is_solution(assignment):
+            #send(quee, assignment, True)
+            return assignment
+        #send(quee, assignment, False)
+        vars = get_conflicted_variables(assignment)
+        var = vars[random.randrange(0, len(vars))]
+        value = get_min_conflict_value_for(var, assignment)
+        assignment[var] = value
+    return None
+
+    
+if __name__ == '__main__':
+    print solve(5)
