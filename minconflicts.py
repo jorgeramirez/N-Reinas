@@ -1,5 +1,7 @@
 #!/usr/bin/python
 import random
+import time
+from board import *
 
 MAX_ITER = 100000000
 BIG_INT = 100000000
@@ -8,6 +10,10 @@ def generate_random_assignment(n):
     r = range(0, n)
     random.shuffle(r)
     return r
+
+def generate_greedy_assignment(n):
+   r = []
+	
 
 def count_conflicts(pos, val, assignment):
     c = 0
@@ -54,21 +60,30 @@ def get_min_conflict_value_for(var, assignment):
 def send(q, a, s):
     q.put(dict(board=a, solution=s))
 
-def solve(n, quee=None):
+def solve(n):
     assignment = generate_random_assignment(n)
+    board = [-1 for i in range(n)]
+    aux = {"board": board, "solution":False}
+    q = Queue()
+    send(q, board, False)
+    p2 = Process(target=draw_board, args=(q,))
+    p2.start()
+    number_iter = 0
     print assignment
+    t1 = time.time()
     for i in xrange(0, MAX_ITER):
-        #print i
         if is_solution(assignment):
-            #send(quee, assignment, True)
-            return assignment
-        #send(quee, assignment, False)
+            send(q, assignment, True)
+            break            
+        send(q, assignment, False)
         vars = get_conflicted_variables(assignment)
         var = vars[random.randrange(0, len(vars))]
         value = get_min_conflict_value_for(var, assignment)
         assignment[var] = value
-    return None
+        number_iter += 1
 
-    
-if __name__ == '__main__':
-    print solve(5)
+	t2 = time.time()
+    delta_time = t2 - t1
+    print delta_time
+    draw_stats(number_iter, round(delta_time, 8))
+    return None
