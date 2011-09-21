@@ -65,7 +65,7 @@ def solve(n):
     board = [-1 for i in range(n)]
     aux = {"board": board, "solution":False}
     q = Queue()
-    send(q, board, False)
+    q.put(aux)
     p2 = Process(target=draw_board, args=(q,))
     p2.start()
     number_iter = 0
@@ -73,9 +73,9 @@ def solve(n):
     t1 = time.time()
     for i in xrange(0, MAX_ITER):
         if is_solution(assignment):
-            send(q, assignment, True)
-            break            
-        send(q, assignment, False)
+            q.put({"board": assignment, "solution":True})
+            break
+        q.put({"board": assignment, "solution":False})        
         vars = get_conflicted_variables(assignment)
         var = vars[random.randrange(0, len(vars))]
         value = get_min_conflict_value_for(var, assignment)
@@ -86,4 +86,4 @@ def solve(n):
     delta_time = t2 - t1
     print delta_time
     draw_stats(number_iter, round(delta_time, 8))
-    return None
+    #return None
