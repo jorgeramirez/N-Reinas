@@ -3,17 +3,11 @@
 import pygame
 from multiprocessing import Process, Queue
 
-def draw_board(q):
+def draw_board(q, n):
     """ Draw a chess board with queens, as determined by the the_board. """
-
-    if not q.empty():
-        e = q.get()
-        the_board = e["board"]
-        solution = e["solution"]
     pygame.init()
     colors = [(255,250,250), (0,0,0), (255,255,0)]    # set up colors [white, black,yellow]
 
-    n = len(the_board)        # this is an NxN chess board.
     surfaceSz = 480           # Proposed physical surface size.
     sq_sz = surfaceSz // n    # sq_sz is length of a square.
     surfaceSz = n * sq_sz     # Adjust to exact multiple of sq_sz
@@ -39,6 +33,11 @@ def draw_board(q):
         if ev.type == pygame.QUIT:
             break;
 
+        if not q.empty():
+            e = q.get()
+            the_board = e["board"]
+            solution = e["solution"]
+
         # Draw a fresh background (a blank chess board)
         for row in range(n):         # Draw each row of the board.
             c_indx = row % 2           # Alternate starting color
@@ -58,10 +57,7 @@ def draw_board(q):
                     (col*sq_sz+ball_offset,row*sq_sz+ball_offset))
 
         pygame.display.flip()
-        if not q.empty():
-            e = q.get()
-            the_board = e["board"]
-            solution = e["solution"]
+        
         pygame.time.delay(50)
 
 
@@ -88,11 +84,7 @@ def draw_stats(nodos, tiempo):
     pygame.quit()
 
 		
-		
-		
-    
-
-    
+	
 	
 	
 

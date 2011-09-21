@@ -45,10 +45,12 @@ solutions."""
 def backtracking(queen_number, uno):
     global nodos_visitados
     board = [-1 for i in range(queen_number)]
-    aux = {"board": board, "solution":False}
+    print board
     q = Queue()
+    aux = {"board": board, "solution":False}
     q.put(aux)
-    p2 = Process(target=draw_board, args=(q,))
+    #print q.qsize()
+    p2 = Process(target=draw_board, args=(q, queen_number))
     p2.start()
     t1 = time.time()
     for solution in queens(queen_number,q):

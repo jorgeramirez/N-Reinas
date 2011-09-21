@@ -52,7 +52,7 @@ class MainWin:
         if combo1.get_active() == 0:
             p1 = Process(target=solve, args=(n,))
             p1.start()
-        
+                    
         if combo1.get_active() == 1:
             if combo2.get_active() == 0:
                 p1 = Process(target=backtracking, args=(n,True))

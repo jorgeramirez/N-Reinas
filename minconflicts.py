@@ -66,7 +66,8 @@ def solve(n):
     aux = {"board": board, "solution":False}
     q = Queue()
     q.put(aux)
-    p2 = Process(target=draw_board, args=(q,))
+    print q.empty()
+    p2 = Process(target=draw_board, args=(q, n))
     p2.start()
     number_iter = 0
     print assignment
