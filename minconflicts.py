@@ -85,4 +85,3 @@ def solve(n):
     t2 = time.time()
     delta_time = (t2 - t1) * 1000
     draw_stats(number_iter, round(delta_time, 5))
-    #return None
