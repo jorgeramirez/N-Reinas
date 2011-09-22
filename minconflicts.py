@@ -66,11 +66,10 @@ def solve(n):
     aux = {"board": board, "solution":False}
     q = Queue()
     q.put(aux)
-    print q.empty()
+
     p2 = Process(target=draw_board, args=(q, n))
     p2.start()
     number_iter = 0
-    print assignment
     t1 = time.time()
     for i in xrange(0, MAX_ITER):
         if is_solution(assignment):
@@ -83,8 +82,7 @@ def solve(n):
         assignment[var] = value
         number_iter += 1
 
-	t2 = time.time()
-    delta_time = t2 - t1
-    print delta_time
-    draw_stats(number_iter, round(delta_time, 8))
+    t2 = time.time()
+    delta_time = (t2 - t1) * 1000
+    draw_stats(number_iter, round(delta_time, 5))
     #return None

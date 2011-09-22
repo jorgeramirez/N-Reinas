@@ -84,16 +84,10 @@ def vegas(N):
                 column -= 1
 		
         nodos += 1
-        print "Reinas"
-        print reinas
         solucion = {"solution": False, "board" : reinas}
         q.put(solucion)
     solucion = {"solution": True, "board" : reinas}
     q.put(solucion)
     t2 = time.time()
-    tiempo = t2 - t1
-    print "Tiempo:"
-    print tiempo
-    print "Nodos:"
-    print nodos
-    draw_stats(nodos, round(tiempo, 8))
+    tiempo = (t2 - t1) * 1000
+    draw_stats(nodos, round(tiempo, 5))

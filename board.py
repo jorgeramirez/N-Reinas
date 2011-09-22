@@ -78,7 +78,7 @@ def draw_stats(nodos, tiempo):
             break
         surface.fill((0, 200, 255), surface.get_rect())        			            
         text1 = my_font.render('Nodos expandidos: ' + str(nodos), True, (0,0,0))	
-        text2 = my_font.render('Tiempo de ejecucion: ' + str(tiempo) + " seg", True, (0,0,0))
+        text2 = my_font.render('Tiempo de ejecucion: ' + str(tiempo) + " ms", True, (0,0,0))
         surface.blit(text1, (10, 10))
         surface.blit(text2, (10, 40))
         pygame.display.flip()

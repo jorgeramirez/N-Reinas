@@ -53,9 +53,8 @@ def backtracking(queen_number, uno):
     for solution in queens(queen_number,q):
         solucion = {"solution": True, "board" : solution}
         q.put(solucion)
-        print solution
         if solution and uno:
             break
     t2 = time.time()
-    tiempo = t2-t1
-    draw_stats(nodos_visitados, round(tiempo, 8))
+    tiempo = (t2-t1) * 1000
+    draw_stats(nodos_visitados, round(tiempo, 5))
