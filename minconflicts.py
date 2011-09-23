@@ -27,15 +27,6 @@ class UniversalDict:
         return '{Any: %r}' % self.value
     
 
-def queen_constraint(A, a, B, b):
-    """
-    Constraint is satisfied (true) if A, B are really the same variable,
-    or if they are not in the same row, down diagonal, or up diagonal.
-    """
-    return A == B or (a != b and A + a != B + b and A - a != B - b)
-
-
-
 class NQueensCSP:
     """
     Make a CSP for the nQueens problem for search with min_conflicts.
@@ -52,8 +43,6 @@ class NQueensCSP:
     def __init__(self, n):
         self.vars = range(n)
         self.domains = UniversalDict(range(n))
-        self.neighbors = UniversalDict(range(n))
-        self.constraints = queen_constraint
         self.rows = [0] * n   # Number of queens in the ith row (i.e val == i)
         self.ups = [0] * (2 * n - 1) # Number of queens in the \ diagonal
         self.downs = [0] * (2 * n - 1) # Number of queens in the / diagonal
